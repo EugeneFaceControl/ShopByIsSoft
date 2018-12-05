@@ -32,5 +32,12 @@ namespace ShopByTests
             Browser.Init(browserName);
             Browser.SetImplicitWait(settings.ImplicitTimeout);
         }
+
+        [Test]
+        public void DoSmth()
+        {
+
+        }
+
     }
 }

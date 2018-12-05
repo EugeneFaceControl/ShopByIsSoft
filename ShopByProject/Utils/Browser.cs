@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.Extensions;
@@ -15,7 +17,14 @@ namespace ShopByProject.Utils
             switch (browserName)
             {
                 case BrowserEnum.Chrome:
-                    WebDriver = new ChromeDriver();
+                    var defaultDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    var relativePath = @"..\..\..\ShopByProject\Utils\Drivers";
+                    var chromeDriverPath = Path.GetFullPath(Path.Combine(defaultDirectory, relativePath));
+                    WebDriver = new ChromeDriver(chromeDriverPath);
+                    break;
+                case BrowserEnum.FireFox:
+                    break;
+                case BrowserEnum.Grid:
                     break;
                 default:
                     throw new Exception("Unknown browser!");
@@ -23,6 +32,11 @@ namespace ShopByProject.Utils
 
             WebDriver.Manage().Window.Maximize();
         }
+//
+//        public static IWebDriver GetChromeDriver()
+//        {
+//
+//        }
 
         public static void GoTo(string url)
         {
