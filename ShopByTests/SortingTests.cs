@@ -20,10 +20,12 @@ namespace ShopByTests
             var resultsPage = section.
                 ChooseCategory("Компьютеры")
                 .ChooseSubCategory("Ноутбуки");
-            resultsPage.ChangePrice()
-                .SetPriceFrom("700")
-                .SetPriceTo("1500");
-            resultsPage.ChangeProducer();
+//            resultsPage.ChangePrice()
+//                .SetPriceFrom("700")
+//                .SetPriceTo("1500");
+            resultsPage.ChangeProducer()
+                .CheckProducers("Lenovo", "Dell", "HP");
+            resultsPage.ChangeScreenResolution();
         }
     }
 }

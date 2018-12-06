@@ -7,10 +7,11 @@ using OpenQA.Selenium;
 
 namespace ShopByProject.Pages.ResultsPage
 {
-    public class Producer : FormWithCheckboxes
+    public class ScreenResolution : FormWithCheckboxes
     {
-        public Producer(IWebElement filterName) : base(filterName)
+        public ScreenResolution(IWebElement filterName) : base(filterName)
         {
+            
         }
     }
 }

@@ -14,6 +14,7 @@ namespace ShopByProject.Pages.ResultsPage
             {
                 element.FindElement(By.CssSelector("ModelFilter__ParamName")).Click();
             }
+
             return element;
         }
 
@@ -29,7 +30,11 @@ namespace ShopByProject.Pages.ResultsPage
             return new Producer(producerElement);
         }
 
-
-
+        public ScreenResolution ChangeScreenResolution()
+        {
+            // TODO Think about it
+            var resolutionElement = ChangeParam("Диагональ экрана, \"");
+            return new ScreenResolution(resolutionElement);
+        }
     }
 }
