@@ -8,11 +8,11 @@ using ShopByProject.Enums;
 
 namespace ShopByProject.Utils
 {
-    public class TestSettings
+    public static class TestSettings
     {
-        public string BaseURL => GetSetting("baseURL");
+        public static string BaseURL => GetSetting("baseURL");
 
-        public BrowserEnum BrowserName
+        public static BrowserEnum BrowserName
         {
             get
             {
@@ -21,10 +21,10 @@ namespace ShopByProject.Utils
             }
         }
 
-        public double ExplicitTimeout => double.Parse(GetSetting("explicitTimeout"));
-        public double ImplicitTimeout => double.Parse(GetSetting("implicitTimeout"));
+        public static double ExplicitTimeout => double.Parse(GetSetting("explicitTimeout"));
+        public static double ImplicitTimeout => double.Parse(GetSetting("implicitTimeout"));
 
-        private string GetSetting(string key)
+        private static string GetSetting(string key)
         {
             return ConfigurationManager.AppSettings[key];
         }

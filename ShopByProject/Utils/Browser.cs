@@ -1,14 +1,14 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.Extensions;
 using ShopByProject.Enums;
 
 namespace ShopByProject.Utils
 {
-    public class Browser
+    public static class Browser
     {
         public static IWebDriver WebDriver { get; private set; }
         private static string DefaultDirectory => AppDomain.CurrentDomain.BaseDirectory;
@@ -19,7 +19,6 @@ namespace ShopByProject.Utils
             switch (browserName)
             {
                 case BrowserEnum.Chrome:
-                    
                     var chromeDriverPath = Path.GetFullPath(Path.Combine(DefaultDirectory, RelativePath, @"Utils\Drivers"));
                     WebDriver = new ChromeDriver(chromeDriverPath);
                     break;
@@ -33,11 +32,12 @@ namespace ShopByProject.Utils
 
             WebDriver.Manage().Window.Maximize();
         }
-//
-//        public static IWebDriver GetChromeDriver()
-//        {
-//
-//        }
+
+        public static void FocusOnElement(IWebElement element)
+        {
+            var action = new Actions(WebDriver);
+            action.MoveToElement(element).Perform();
+        }
 
         public static void GoTo(string url)
         {
@@ -60,6 +60,20 @@ namespace ShopByProject.Utils
         public static void TakeScreenShot(string testName)
         {
             WebDriver.TakeScreenshot().SaveAsFile(Path.Combine(DefaultDirectory, RelativePath, $@"bin\Debug\{testName}.jpg"));
+        }
+
+        public static void ExecuteJs(string jsString, IWebElement element)
+        {
+            IJavaScriptExecutor js = WebDriver as IJavaScriptExecutor;
+            var result = js?.ExecuteScript(jsString, element);
+            Console.WriteLine(result);
+        }
+
+        public static void ExecuteJs(string jsString)
+        {
+            IJavaScriptExecutor js = WebDriver as IJavaScriptExecutor;
+            var result = js?.ExecuteScript(jsString);
+            Console.WriteLine(result);
         }
     }
 }

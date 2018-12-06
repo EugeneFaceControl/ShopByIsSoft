@@ -9,7 +9,6 @@ namespace ShopByTests
     [TestFixture]
     public class BaseTest
     {
-        private TestSettings settings;
 
         public string Id { get; set; }
 
@@ -17,8 +16,7 @@ namespace ShopByTests
         public void SetUp()
         {
             Id = DateTime.Now.ToString("MMddHHmmss");
-            settings = new TestSettings();
-            BrowserInit(settings.BrowserName);
+            BrowserInit(TestSettings.BrowserName);
         }
 
         [TearDown]
@@ -40,12 +38,7 @@ namespace ShopByTests
         public void BrowserInit(BrowserEnum browserName)
         {
             Browser.Init(browserName);
-            Browser.SetImplicitWait(settings.ImplicitTimeout);
-        }
-
-        [Test]
-        public void DoSmth()
-        {
+            Browser.SetImplicitWait(TestSettings.ImplicitTimeout);
         }
 
     }
