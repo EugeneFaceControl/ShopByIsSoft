@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using ShopByProject.Enums;
 using ShopByProject.Utils;
@@ -10,9 +11,12 @@ namespace ShopByTests
     {
         private TestSettings settings;
 
+        public string Id { get; set; }
+
         [SetUp]
         public void SetUp()
         {
+            Id = DateTime.Now.ToString("MMddHHmmss");
             settings = new TestSettings();
             BrowserInit(settings.BrowserName);
         }
@@ -20,11 +24,17 @@ namespace ShopByTests
         [TearDown]
         public void CleanUp()
         {
-            if (TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Passed)
+            try
             {
-                Browser.TakeScreenShot(TestContext.CurrentContext.Test.Name);
+                if (TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Passed)
+                {
+                    Browser.TakeScreenShot($"{TestContext.CurrentContext.Test.Name} {Id}");
+                }
             }
-            Browser.Close();
+            finally
+            {
+                Browser.Close();
+            }
         }
 
         public void BrowserInit(BrowserEnum browserName)
@@ -36,7 +46,6 @@ namespace ShopByTests
         [Test]
         public void DoSmth()
         {
-
         }
 
     }

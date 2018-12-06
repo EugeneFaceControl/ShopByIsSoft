@@ -11,15 +11,16 @@ namespace ShopByProject.Utils
     public class Browser
     {
         public static IWebDriver WebDriver { get; private set; }
+        private static string DefaultDirectory => AppDomain.CurrentDomain.BaseDirectory;
+        private const string RelativePath = @"..\..\..\ShopByProject";
 
         public static void Init(BrowserEnum browserName)
         {
             switch (browserName)
             {
                 case BrowserEnum.Chrome:
-                    var defaultDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                    var relativePath = @"..\..\..\ShopByProject\Utils\Drivers";
-                    var chromeDriverPath = Path.GetFullPath(Path.Combine(defaultDirectory, relativePath));
+                    
+                    var chromeDriverPath = Path.GetFullPath(Path.Combine(DefaultDirectory, RelativePath, @"Utils\Drivers"));
                     WebDriver = new ChromeDriver(chromeDriverPath);
                     break;
                 case BrowserEnum.FireFox:
@@ -58,7 +59,7 @@ namespace ShopByProject.Utils
 
         public static void TakeScreenShot(string testName)
         {
-            WebDriver.TakeScreenshot().SaveAsFile($@"{AppDomain.CurrentDomain.BaseDirectory}Images\{testName}.jpg");
+            WebDriver.TakeScreenshot().SaveAsFile(Path.Combine(DefaultDirectory, RelativePath, $@"bin\Debug\{testName}.jpg"));
         }
     }
 }
