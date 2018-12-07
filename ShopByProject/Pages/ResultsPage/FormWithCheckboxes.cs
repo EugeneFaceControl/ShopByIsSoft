@@ -1,33 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 
 namespace ShopByProject.Pages.ResultsPage
 {
     public class FormWithCheckboxes : BasePage
     {
-        private readonly IWebElement filterName;
-
-        public FormWithCheckboxes(IWebElement filterName)
+        public FormWithCheckboxes()
         {
-            this.filterName = filterName;
+            
+        }
+        private readonly IWebElement filterElement;
+
+        private const string CheckboxesNamesString = ".//a[label[text()='{0}']]/label";
+        private const string ShowMoreStr = ".//span[text()='Еще']";
+
+        public FormWithCheckboxes(IWebElement filterElement)
+        {
+            this.filterElement = filterElement;
         }
 
-        public void CheckProducers(params string[] producerNames)
+        public void CheckOptions(params string[] checkboxesNames)
         {
-            producerNames = producerNames.Select(x => $".//a[label[text()='{x}']]/label").ToArray();
-            var xpathString = string.Join("|", producerNames);
-            var producers = filterName.FindElements(By.XPath(xpathString));
-            foreach (var producer in producers)
+            if (checkboxesNames.Length == 0) return;
+            checkboxesNames = checkboxesNames.Select(x => string.Format(CheckboxesNamesString, x)).ToArray();
+            var xpathString = string.Join("|", checkboxesNames);
+            var checkboxes = filterElement.FindElements(By.XPath(xpathString));
+            foreach (var checkbox in checkboxes)
             {
-                if (!producer.Selected)
+                if (checkbox.Selected) continue;
+                if (checkbox.Enabled)
                 {
-                    producer.Click();
+                    checkbox.Click();
                 }
             }
+        }
+
+        public T ShowAll<T>() where T : FormWithCheckboxes, new()
+        {
+            var instance = Activator.CreateInstance(typeof(T), filterElement) as T;
+            filterElement.FindElement(By.XPath(ShowMoreStr)).Click();
+            return instance;
         }
 
     }

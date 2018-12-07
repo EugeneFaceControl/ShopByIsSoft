@@ -9,7 +9,12 @@ namespace ShopByProject.Pages.ResultsPage
 {
     public class ScreenResolution : FormWithCheckboxes
     {
-        public ScreenResolution(IWebElement filterName) : base(filterName)
+        public ScreenResolution(IWebElement filterElement) : base(filterElement)
+        {
+            
+        }
+
+        public ScreenResolution()
         {
             
         }

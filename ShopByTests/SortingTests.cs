@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using ShopByProject.Pages;
 using ShopByProject.Pages.HomePage;
+using ShopByProject.Pages.ResultsPage;
 using ShopByProject.Utils;
 
 namespace ShopByTests
@@ -24,8 +25,12 @@ namespace ShopByTests
 //                .SetPriceFrom("700")
 //                .SetPriceTo("1500");
             resultsPage.ChangeProducer()
-                .CheckProducers("Lenovo", "Dell", "HP");
-            resultsPage.ChangeScreenResolution();
+                .CheckOptions("Lenovo", "Dell", "HP");
+
+            resultsPage.ChangeScreenResolution()
+                .ShowAll<ScreenResolution>()
+                .CheckOptions("12", "12.1", "12.5", "13", "13.1", "13.3", "13.4");
+            resultsPage.ShowResults();
         }
     }
 }
