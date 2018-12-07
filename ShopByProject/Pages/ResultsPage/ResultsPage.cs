@@ -8,7 +8,9 @@ namespace ShopByProject.Pages.ResultsPage
     public class ResultsPage : BasePage
     {
         private const string ParamStr = "//*[@class='ModelFilter__ParamList']/div[.//span[@class='ModelFilter__ParamName'][. = '{0}']]";
-        private const string ShowResultsStr = "//*[@class='ModelFilter__ParamList']/div[.//span[@class='ModelFilter__ParamName'][. = '{0}']]";
+        private const string ShowResultsStr = "#ModelFilter__NumModelWindow > div:nth-child(1)";
+        private const string AllResults = ".ModelList > div";
+        private const string SortStr = ".PanelSetUp__SortBlock .chzn-txt-sel";
 
         private IWebElement ChangeParam(string paramName)
         {
@@ -19,6 +21,17 @@ namespace ShopByProject.Pages.ResultsPage
             }
 
             return element;
+        }
+
+        public ChangePage ChangePage()
+        {
+            return new ChangePage();
+        }
+
+        public Sort ChangeSorting()
+        {
+            Driver.FindElement(By.CssSelector(SortStr)).Click();
+            return new Sort();
         }
 
         public Price ChangePrice()
@@ -42,9 +55,15 @@ namespace ShopByProject.Pages.ResultsPage
 
         public ResultsPage ShowResults()
         {
-            var showResults = By.CssSelector("#ModelFilter__NumModelWindow > div:nth-child(1)");
-            wait.Until(ExpectedConditions.ElementIsVisible(showResults)).Click();
+            var showResults = By.CssSelector(ShowResultsStr);
+            var showResultsButton = wait.Until(ExpectedConditions.ElementToBeClickable(showResults));
+            showResultsButton.Click();
             return this;
+        }
+
+        public List<IWebElement> GetResults()
+        {
+            return Driver.FindElements(By.CssSelector(AllResults)).ToList();
         }
     }
 }
