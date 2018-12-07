@@ -35,11 +35,11 @@ namespace ShopByTests
             resultsPage = resultsPage.ChangeSorting().SortByAscending();
             var allResults = resultsPage.GetResults();
             Assert.AreEqual(25, allResults.Count);
-            var firstElementFromAscending = allResults[0];
+            var firstElementFromAscending = allResults[0].Text;
             resultsPage = resultsPage.ChangeSorting().SortByDescending();
             resultsPage.ChangePage().GoToLastPage();
             allResults = resultsPage.GetResults();
-            var lastElementFromDescending = allResults[allResults.Count - 1];
+            var lastElementFromDescending = allResults[allResults.Count - 1].Text;
             Assert.AreEqual(firstElementFromAscending, lastElementFromDescending);
         }
     }
