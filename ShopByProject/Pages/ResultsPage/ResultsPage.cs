@@ -11,8 +11,6 @@ namespace ShopByProject.Pages.ResultsPage
     {
         private const string ParamStr =
             "//*[@class='ModelFilter__ParamList']/div[.//span[@class='ModelFilter__ParamName'][. = '{0}']]";
-
-        private const string ShowResultsStr = "#ModelFilter__NumModelWindow > div:nth-child(1)";
         private const string AllResults = ".ModelList > div";
         private const string SortStr = ".PanelSetUp__SortBlock .chzn-txt-sel";
 
@@ -32,10 +30,10 @@ namespace ShopByProject.Pages.ResultsPage
             return new ChangePage();
         }
 
-        public Sort ChangeSorting()
+        public SortComponent ChangeSorting()
         {
             Driver.FindElement(By.CssSelector(SortStr)).Click();
-            return new Sort();
+            return new SortComponent();
         }
 
         public Price ChangePrice()
@@ -50,11 +48,11 @@ namespace ShopByProject.Pages.ResultsPage
             return new Producer(producerElement);
         }
 
-        public ScreenResolution ChangeScreenResolution()
+        public ScreenResolutionComponent ChangeScreenResolution()
         {
             // TODO Think about it
             var resolutionElement = ChangeParam("Диагональ экрана, \"");
-            return new ScreenResolution(resolutionElement);
+            return new ScreenResolutionComponent(resolutionElement);
         }
 
         public ResultsPage ShowResults()

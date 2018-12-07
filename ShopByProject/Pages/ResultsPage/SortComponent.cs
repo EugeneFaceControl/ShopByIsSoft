@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 namespace ShopByProject.Pages.ResultsPage
 {
-    public class Sort : BasePage
+    public class SortComponent : BasePage
     {
         private const string SortVariantsStr = ".PanelSetUp__SortBlock ul > li";
         private readonly List<IWebElement> allSorts;
 
-        public Sort()
+        public SortComponent()
         {
             var sortVariantsBy = By.CssSelector(SortVariantsStr);
             wait.Until(ExpectedConditions.ElementIsVisible(sortVariantsBy));

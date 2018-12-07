@@ -51,7 +51,6 @@
   <ItemGroup>
     <Compile Include="Enums\BrowserEnum.cs" />
     <Compile Include="Pages\BasePage.cs" />
-    <Compile Include="Pages\HomePage\HomePage.cs" />
     <Compile Include="Pages\HomePage\SubSection.cs" />
     <Compile Include="Pages\HomePage\Section.cs" />
     <Compile Include="Pages\ResultsPage\ChangePage.cs" />
@@ -59,8 +58,8 @@
     <Compile Include="Pages\ResultsPage\Price.cs" />
     <Compile Include="Pages\ResultsPage\Producer.cs" />
     <Compile Include="Pages\ResultsPage\ResultsPage.cs" />
-    <Compile Include="Pages\ResultsPage\ScreenResolution.cs" />
-    <Compile Include="Pages\ResultsPage\Sort.cs" />
+    <Compile Include="Pages\ResultsPage\ScreenResolutionComponent.cs" />
+    <Compile Include="Pages\ResultsPage\SortComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Browser.cs" />
     <Compile Include="Utils\TestSettings.cs" />
