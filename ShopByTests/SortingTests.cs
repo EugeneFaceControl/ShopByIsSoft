@@ -16,15 +16,18 @@ namespace ShopByTests
             var resultsPage = section.
                 ChooseCategory("Компьютеры")
                 .ChooseSubCategory("Ноутбуки");
+
             resultsPage.ChangePrice()
                 .SetPriceFrom("700")
                 .SetPriceTo("1500");
+
             resultsPage.ChangeProducer()
                 .CheckOptions("Lenovo", "Dell", "HP");
 
             resultsPage.ChangeScreenResolution()
                 .ShowAll<ScreenResolutionComponent>()
                 .CheckOptions("12", "12.1", "12.5", "13", "13.1", "13.3", "13.4");
+
             resultsPage = resultsPage.ShowResults();
             resultsPage = resultsPage.ChangeSorting().SortByAscending();
             var allResults = resultsPage.GetResults();
