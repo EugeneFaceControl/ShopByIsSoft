@@ -57,9 +57,11 @@ namespace ShopByProject.Utils
             WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(seconds);
         }
 
-        public static void TakeScreenShot(string testName)
+        public static string TakeScreenShot(string testName)
         {
-            WebDriver.TakeScreenshot().SaveAsFile(Path.Combine(DefaultDirectory, RelativePath, $@"bin\Debug\{testName}.jpg"));
+            var screenShotFile = Path.Combine(DefaultDirectory, RelativePath, $@"bin\Debug\{testName}.jpg");
+            WebDriver.TakeScreenshot().SaveAsFile(screenShotFile, ScreenshotImageFormat.Png);
+            return screenShotFile;
         }
 
         public static void ExecuteJs(string jsString, IWebElement element)

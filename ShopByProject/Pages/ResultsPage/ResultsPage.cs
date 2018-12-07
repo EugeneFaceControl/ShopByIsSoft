@@ -1,13 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using ShopByProject.Utils;
 
 namespace ShopByProject.Pages.ResultsPage
 {
     public class ResultsPage : BasePage
     {
-        private const string ParamStr = "//*[@class='ModelFilter__ParamList']/div[.//span[@class='ModelFilter__ParamName'][. = '{0}']]";
+        private const string ParamStr =
+            "//*[@class='ModelFilter__ParamList']/div[.//span[@class='ModelFilter__ParamName'][. = '{0}']]";
+
         private const string ShowResultsStr = "#ModelFilter__NumModelWindow > div:nth-child(1)";
         private const string AllResults = ".ModelList > div";
         private const string SortStr = ".PanelSetUp__SortBlock .chzn-txt-sel";
@@ -56,8 +60,17 @@ namespace ShopByProject.Pages.ResultsPage
         public ResultsPage ShowResults()
         {
             var showResults = By.CssSelector(ShowResultsStr);
-            var showResultsButton = wait.Until(ExpectedConditions.ElementToBeClickable(showResults));
-            showResultsButton.Click();
+            wait.Until(ExpectedConditions.ElementToBeClickable(showResults));
+
+            bool ShowResultsButtonIsClicked()
+            {
+                var showResultsButton = Driver.FindElement(showResults);
+                showResultsButton.Click();
+                return true;
+            }
+
+            new Wait().ExecuteUntilTrue(ShowResultsButtonIsClicked);
+
             return this;
         }
 

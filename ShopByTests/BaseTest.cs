@@ -26,7 +26,9 @@ namespace ShopByTests
             {
                 if (TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Passed)
                 {
-                    Browser.TakeScreenShot($"{TestContext.CurrentContext.Test.Name} {Id}");
+                    var name = $"{TestContext.CurrentContext.Test.Name} {Id}";
+                    var screenShotFile = Browser.TakeScreenShot(name);
+                    TestContext.AddTestAttachment(screenShotFile, name);
                 }
             }
             finally
