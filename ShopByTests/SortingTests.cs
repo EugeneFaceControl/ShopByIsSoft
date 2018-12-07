@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using ShopByProject.Pages.HomePage;
 using ShopByProject.Pages.ResultsPage;
 using ShopByProject.Utils;
@@ -27,7 +28,7 @@ namespace ShopByTests
             resultsPage = resultsPage.ShowResults();
             resultsPage = resultsPage.ChangeSorting().SortByAscending();
             var allResults = resultsPage.GetResults();
-//            Assert.AreEqual(25, allResults.Count);
+            Console.WriteLine($"Quantity of notebooks: {allResults.Count}");
             var firstElementFromAscending = allResults[0].Text;
             resultsPage = resultsPage.ChangeSorting().SortByDescending();
             resultsPage.ChangePage().GoToLastPage();

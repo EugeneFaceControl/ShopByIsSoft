@@ -29,7 +29,6 @@ namespace ShopByProject.Utils
                 default:
                     throw new Exception("Unknown browser!");
             }
-
             WebDriver.Manage().Window.Maximize();
         }
 
