@@ -16,7 +16,6 @@ namespace ShopByProject.Pages.HomePage
         public SubSection ChooseCategory(string catalogElementName)
         {
             var element = CatalogElements.First(x => x.Text == catalogElementName);
-            Browser.ExecuteJs("arguments[0].style.color='red'", element);
             Browser.FocusOnElement(element.FindElement(linkElementBy));
             return new SubSection();
         }
