@@ -58,7 +58,6 @@ namespace ShopByProject.Pages.ResultsPage
         public ResultsPage ShowResults()
         {
             var showResults = By.CssSelector(ShowResultsStr);
-            wait.Until(ExpectedConditions.ElementToBeClickable(showResults));
 
             bool ShowResultsButtonIsClicked()
             {

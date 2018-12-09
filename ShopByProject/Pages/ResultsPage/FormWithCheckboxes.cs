@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace ShopByProject.Pages.ResultsPage
 {
@@ -31,6 +32,7 @@ namespace ShopByProject.Pages.ResultsPage
                 if (checkbox.Selected) continue;
                 if (checkbox.Enabled)
                 {
+                    wait.Until(ExpectedConditions.ElementToBeClickable(checkbox));
                     checkbox.Click();
                 }
             }
